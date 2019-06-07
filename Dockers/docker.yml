@@ -1,0 +1,13 @@
+- name: Pull centos image
+  hosts: localhost
+  tasks: 
+  - name: pull
+    docker_image: 
+      name: centos
+      path: /root/Desktop/rhel7_5_software_extras
+      state: present
+
+
+
+
+

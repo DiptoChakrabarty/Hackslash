@@ -1,0 +1,9 @@
+---
+   - name: User Add
+     hosts: all 
+     tasks:
+        - name: Adding User
+          user:
+              name: total
+              state: present
+              password: pinku 
