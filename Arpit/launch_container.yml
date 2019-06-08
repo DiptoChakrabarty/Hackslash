@@ -1,0 +1,19 @@
+- hosts: docker
+  tasks:
+    - name: "installing docker container"
+      docker_container: 
+          name: "vlc3"
+          image: "centos"
+          volumes: 
+            - /run/media/root/RHEL-7.5\ Server.x86_64:/dvd
+              /root/rhel7_5_rpm_extras:/rpm
+              /root/rhel7_extra_new_rpm:/new_rpm
+              /root/python_lib:/python_lib
+              /tmp/.X11-unix:/tmp/.X11-unix
+          devices:
+            - /dev/snd
+          command: /bin/bash
+          state: present
+          interactive: yes
+          tty: yes
+     

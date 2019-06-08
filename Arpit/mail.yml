@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+   -  mail:
+        host: smtp.gmail.com  
+        port: 587
+        username: maiarpitjain94@gmail.com
+        password: arpit@94
+        to: "Arpit<arpitkumarjain.cse20@jecrc.ac.in>"
+        subject: "{{subject}}"
+        body: "hi arpit"
