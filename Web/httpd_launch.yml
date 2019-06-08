@@ -1,7 +1,0 @@
-- hosts: all
-  tasks:
-  - package: "name=httpd state=present"
-  - copy: "dest=/var/www/html  src=/var/www/html/web.html"
-  - service: "name=httpd state=started enabled=yes"
-
-
