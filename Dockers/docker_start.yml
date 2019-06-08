@@ -1,0 +1,56 @@
+---
+- hosts: localhost
+  tasks: 
+    - name: Install Pip
+      package:
+        name: python-pip
+        state: present
+    - name: Install docker-py
+      pip:
+        name: docker-py
+    - name: Build Docker Image
+      docker_image:
+        name: yum3
+        path: "/root/Docker" 
+        state: build
+    - name: Running Container
+      docker_container:
+        name: dock_yum3
+        image: yum3
+        state: started
+        interactive: true
+        tty: true
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
