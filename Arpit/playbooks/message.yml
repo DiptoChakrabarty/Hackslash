@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars_files:
+    - pass.yml
+  vars_prompt:
+    - name: number
+      private: no
+      prompt: "entr number"
+    - name: msg
+      private: no
+      prompt: enter msg 
+  tasks:
+    - twilio:
+         msg: "{{msg}}"
+         account_sid: "{{twilio_sid}}"
+         auth_token: "{{twilio_auth}}"
+         from_number: "+18577631845"
+         to_number: "{{number}}"
+      

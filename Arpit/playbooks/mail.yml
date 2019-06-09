@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars_prompt:
+    - name: mail_id_sender
+      prompt: Enter your mail id
+      private: no
+    - name: password
+      prompt: Enter your passwrod
+    - prompt: enter reciever's mail id
+      name: mail_id_reciever
+      private: no
+    - name: subject
+      prompt: Enter subject
+      private: no
+    - name: body
+      prompt: body
+      private: no
+
+  tasks:
+   -  mail:
+        host: smtp.gmail.com  
+        port: 587
+        username: maiarpitjain94@gmail.com
+        password: arpit@94
+        to: "Arpit<arpitkumarjain.cse20@jecrc.ac.in>"
+        subject: "{{subject}}"
+        body: "hi arpit"

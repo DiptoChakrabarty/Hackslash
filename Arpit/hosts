@@ -1,2 +1,2 @@
 [docker]
-127.0.0.1 ansible_user=root ansible_password=redhat
+192.168.43.238 ansible_user=root ansible_password=redhat
