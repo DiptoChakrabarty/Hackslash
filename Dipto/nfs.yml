@@ -5,9 +5,9 @@
      private: no
      prompt: "Enter Ip address"
   vars:
-    nfs_mountpoint: "/mnt/fi"
+    nfs_mountpoint: "/mnt/fit"
     nfs_server: "192.168.43.254"
-    nfsexport:  "/mnt/fi"
+    nfsexport:  "/mnt/fit"
   tasks:
      - name: Check and Install nfs packages
        package: 
@@ -38,7 +38,7 @@
      - name: Update Fstab
        mount:
          name: "{{nfs_mountpoint}}"
-         src: "{{nfs_server }}:{{nfsexport}}"
+         src: "{{nfs_server }}:/{{nfsexport}}"
          fstype: nfs
          state: mounted
        tags: nfs_client

@@ -19,8 +19,9 @@
         state: started
         interactive: true
         tty: true
-        command: /usr/bin/firefox -DFOREGROUND
-        #command: docker attach "{{dock}}" 
+        command: /usr/bin/firefox -D FOREGROUND
+        command: docker start "{{dock}}"
+        command: docker attach "{{dock}}" 
    
 
 

@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: "{{var0}}"
   tasks: 
     - name: Install Pip
       package:
