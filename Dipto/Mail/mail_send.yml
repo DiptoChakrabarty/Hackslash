@@ -1,13 +1,17 @@
 ---
    - name: Mail
+     vars:
+	var0: "{{var1}}"
+	var_attach: "{{var2}}"
      mail: 
        host: "smtp.gmail.com"
        port: 587
        username: "@gmail.com"
        password: 
-       to:  " <@gmail.com>"
+       to:  " <{{var0}}>"
        subject: "ansible"
        body: "LVM of 50 Gb"
-       secure: starttls
+       attach: "{{var_attach}}"
+#       secure: starttls
      delegate_to: localhost
         

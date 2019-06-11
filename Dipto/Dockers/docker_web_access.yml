@@ -1,5 +1,9 @@
 ---
 - hosts: localhost
+  vars_prompt:
+    - name: dock
+      private: no
+      prompt: "Enter Docker Name"
   tasks: 
     - name: Install Pip
       package:
@@ -10,11 +14,14 @@
         name: docker-py
     - name: Running Container
       docker_container:
-        name: "{{var1}}"
-        image: centos
+        name: "{{dock}}"
+        image: firefox:v4
         state: started
-        tty: yes
-        interactive: yes
+        interactive: true
+        tty: true
+        command: /usr/bin/firefox -DFOREGROUND
+        #command: docker attach "{{dock}}" 
+   
 
 
 

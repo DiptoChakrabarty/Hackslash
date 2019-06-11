@@ -1,9 +1,12 @@
 ---
    - name: User Add
-     hosts: all 
+     hosts: localhost
+    # vars:
+      #  var0: "{{var1}}"
+      #  prompt: Enter Your Username
      tasks:
         - name: Adding User
           user:
-              name: total
+              name: "{{var1}}"
               state: present
               password: pinku 

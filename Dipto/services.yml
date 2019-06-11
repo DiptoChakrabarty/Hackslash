@@ -1,0 +1,13 @@
+---
+- hosts: all
+  vars_prompt:
+   - name: service
+     private: no
+     prompt: "Enter service name"
+   - name: state
+     private: no
+     prompt: "Enter state"
+  tasks:
+     - package:
+         name: "{{service}}"
+         state: "{{state}}"

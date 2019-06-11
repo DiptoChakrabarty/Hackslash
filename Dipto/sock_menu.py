@@ -9,14 +9,21 @@ cl,addr=s.accept()
 while True:
 	data=cl.recv(50)
 	cmd=data.decode()
+	cl.send(data)
 	if cmd=="adduser":
-		sp.getoutput("ansible-playbook add_user.yml")
+		data2=cl.recv(20)
+		username=data2.decode()
+		sp.getoutput("ansible-playbook /root/Desktop/Github/Menu-Automation/add_user.yml --extra-vars 'var1={}'".format(username))
 	if cmd=="dockerlaunch":
-		sp.getoutput("ansible-playbook Dockers/docker_start.yml")
+		data2=cl.recv(20)
+		name=data2.decode()
+		sp.getoutput("ansible-playbook /root/Desktop/Github/Menu-Automation/Dockers/docker_update.yml --extra-vars  'var1={}'".format(name))
 	if cmd=="httpd":
-		sp.getoutput("ansible-playbook Web/httpd_launch.yml")
+		sp.getoutput("ansible-playbook /root/Desktop/Github/Menu-Automation/Web/httpd_launch.yml")
 	if cmd=="nginx":
-		sp.getoutput("ansible-playbook Web/nginx.yml")
+		sp.getoutput("ansible-playbook /root/Desktop/Github/Menu-Automation/Web/nginx.yml")
+	if cmd=="mail":
+		sp.getoutput("ansible-playbook /root/Desktop/root/Desktop/Github/Menu-Automation/Mail/mail_send.yml")
  
 	if cmd=="exit":
 		break
