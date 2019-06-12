@@ -8,9 +8,10 @@ while True:
 	print("\t\tpress1 to configure webserver")
 	print("\t\tpress2 to run docker")
 	print("\t\tpress3 to send mail ")
-	print("\t\tpress4 to take software as a service ")
-	print("\t\tpress4 to launch ec2 instance")
-	print("\t\tpress5 to run command manually on remote server")
+	print("\t\tpress4 to send message to a number")
+	print("\t\tpress5 to configure yum")
+	print("\t\tpress6 to run software")
+	print("\t\tpress7 to run your privacy")
 
 	choice=int(input("Enter your choice"))	
 
@@ -31,11 +32,32 @@ while True:
 			functions.remote_docker()
 		else:
 			print("Please enter valid choice")
+	
+
 	if choice==3:
 		functions.mail()
+	
+
+	if choice==4:
+		functions.sms()
+	
+
+	if choice==5:
+		functions.yum()
+    
+	if choice==6:
+		functions.saas()
+
+	if choice==7:
+		functions.privacy()
 
 	else:
 		print("invalid")
+
+
+
 	choice_con=input("Do you want to continue y/n")
-	if choice_con=='n':
+	if choice_con=='y':
+		continue
+	else:
 		break

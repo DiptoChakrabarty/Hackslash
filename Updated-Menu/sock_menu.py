@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 def data_recv():
 	data=cl.recv(50)
 	cmd=data.decode()
@@ -50,3 +52,4 @@ while True:
 	
 
 	
+>>>>>>> 8dcee1b987d12fd46e35536c1bfbd69fc6e48100
