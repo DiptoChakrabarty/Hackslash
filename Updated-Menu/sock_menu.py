@@ -5,6 +5,7 @@ def data_recv():
 def data_send(cmd):
 	s.send(cmd.encode())
 def ip_add(ip,user,passwd):
+	sp.getoutput(" echo '[current]' | cat > hosts ")
 	sp.getoutput(" echo {} | cat >> hosts".format(ip))
 	sp.getoutput(" ssh-copy-id -p {}  {}@{}".format(passwd,user,ip))
 def ip_check(ip):
@@ -31,10 +32,20 @@ while True:
 		ip=data_recv()
 		ip_check(ip)
 		os.system("ansible-playbook  ./Playbooks/add_user.yml --extra-vars  'var1={}' --extra-vars 'var0={}' ".format(username,ip))
+	elif cmd=="yum":
+		ip=data_recv()
+		ip_check(ip)
+		os.system("ansible-playbook  ./Playbooks/systems/repolist.yml --extra-vars 'var0={}' ".format(ip))
+	elif cmd=="webserver":
+		server=data_recv()
+		ip=data_recv()
+		ip_check(ip)
+	#	os.system("ansible-playbook  ./Playbooks/systems/repolist.yml --extra-vars 'var0={}' ".format(ip))
+		os.system("ansible-playbook  ./Playbooks/Web/{}.yml".format(server))
 	elif cmd=="exit":
 		break
 
-exit()
+	
 		
 	
 

@@ -1,0 +1,21 @@
+- name: Launch httpd
+  hosts: all
+  tasks: 
+   - name: nginx uinstall
+     package:
+        name: nginx
+        state: absent
+   - name: httpd Launch
+     package:
+       name: httpd
+       state: present
+   - name: Httpd service
+     service:
+       name: httpd
+       state: started
+       enabled: yes
+   - firewalld:
+        port: 80/tcp
+        state: enable
+        immediate: yes
+        permanent: yes

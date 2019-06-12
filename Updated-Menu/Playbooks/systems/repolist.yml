@@ -1,12 +1,16 @@
 ---
 - hosts: "{{ var0 }}"
   tasks:
+  - name: Copying The repo
+    copy:
+        src: yus.repo
+        dest: /etc/yum.repos.d/yus.repo
   - name: Mounting Files
     mount: 
         path: /dvd_final
         src:  /dev/cdrom
         fstype: iso9660
-        opts: ro,noauto
+        opts: defaults
         state: mounted
   - name: Add Repos        
     yum_repository:
