@@ -7,6 +7,11 @@ def data_send(cmd):
 def ip_add(ip,user,passwd):
 	sp.getoutput(" echo {} | cat >> hosts".format(ip))
 	sp.getoutput(" ssh-copy-id -p {}  {}@{}".format(passwd,user,ip))
+def ip_check(ip):
+	if ip!="localhost":
+		user=data_recv()	
+		passwd=data_recv()
+		ip_add(ip,user,passwd)
 import socket
 import os
 import subprocess as sp
@@ -24,13 +29,7 @@ while True:
 		username=data_recv()
 		print(username)
 		ip=data_recv()
-		print(ip)
-		user=data_recv()
-		print(user)
-		passwd=data_recv()
-		print(passwd)
-		if ip!="localhost":
-			ip_add(ip,user,passwd)
+		ip_check(ip)
 		os.system("ansible-playbook  ./Playbooks/add_user.yml --extra-vars  'var1={}' --extra-vars 'var0={}' ".format(username,ip))
 	elif cmd=="exit":
 		break
