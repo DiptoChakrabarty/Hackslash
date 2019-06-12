@@ -1,6 +1,6 @@
 ---
-   - name: User Add
-     hosts: localhost
+   - name: Adding user
+     hosts: "{{var0}}"
     # vars:
       #  var0: "{{var1}}"
       #  prompt: Enter Your Username
