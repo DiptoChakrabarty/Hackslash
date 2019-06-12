@@ -1,0 +1,17 @@
+---
+- hosts: "{{ var0 }}"
+  tasks:
+  - name: Mounting Files
+    mount: 
+        path: /dvd_final
+        src:  /dev/cdrom
+        fstype: iso9660
+        opts: ro,noauto
+        state: mounted
+  - name: Add Repos        
+    yum_repository:
+        name: local
+        description: Local Dvd Repos
+        baseurl: "file:///dvd_final"
+        enabled: yes
+        gpgcheck: no

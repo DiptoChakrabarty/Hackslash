@@ -1,0 +1,4 @@
+- hosts: localhost
+  tasks:
+    - command: "ssh -l root -X 172.17.0.2 firefox"
+         
