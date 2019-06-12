@@ -1,0 +1,56 @@
+---
+- hosts: localhost
+  tasks: 
+    - name: Install Pip
+      package:
+        name: python-pip
+        state: present
+    - name: Install docker-py
+      pip:
+        name: docker-py
+    - name: Build Docker Image
+      docker_image:
+        name: new
+        path: "/root/Docker" 
+        state: build
+    - name: Running Container
+      docker_container:
+        name: "{{var1}}"
+        image: new
+        state: started
+        interactive: true
+        tty: true
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+---
+- hosts: "{{var0}}"
+  tasks: 
+    - name: Install Pip
+      package:
+        name: python-pip
+        state: present
+    - name: Install docker-py
+      pip:
+        name: docker-py
+    - name: Running Container
+      docker_container:
+        name: "{{var1}}"
+        image: centos
+        state: started
+        tty: yes
+        interactive: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+- hosts: localhost
+  tasks:
+    - name: "my docker work"
+      docker_container:
+        image: website
+        name: "{{var1}}"
+        state: started
+        restart: yes
+        tty: yes
+        interactive: yes
+        volumes:
+          - /tmp/.X11-unix:/tmp/.X11-unix
+       #  - /root/rhel7_5_rpm_extras:/data1
+       #  - /root/rhel7_extra_new_rpm:/data2
+       #  - /run/media/root/RHEL-7.5 Server.x86_64:/data3
+         
+
+

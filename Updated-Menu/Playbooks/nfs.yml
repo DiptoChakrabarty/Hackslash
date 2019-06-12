@@ -1,0 +1,44 @@
+---
+- hosts: all
+  vars_prompt:
+   - name: ip
+     private: no
+     prompt: "Enter Ip address"
+  vars:
+    nfs_mountpoint: "/mnt/fit"
+    nfs_server: "192.168.43.254"
+    nfsexport:  "/mnt/fit"
+  tasks:
+     - name: Check and Install nfs packages
+       package: 
+        name: nfs-utils
+        state: present
+       with_items:
+        - nfs-utils
+       tags: nfs_client,nfs_server
+     - name: copy files
+       template: 
+        src: /root/Desktop/Github/Menu-Automation/nfs
+        dest: /etc/exports
+        owner: root
+        mode: 755
+       tags: nfs_server
+     - name: start nfs server
+       service: 
+         name: nfs-utils
+         state: restarted
+         enabled: yes
+       tags: nfs_server
+     - name: create mountpoint
+       file: 
+         path: "{{nfs_mountpoint}}"
+         state: directory
+         mode: 755
+       tags: nfs_client
+     - name: Update Fstab
+       mount:
+         name: "{{nfs_mountpoint}}"
+         src: "{{nfs_server }}:/{{nfsexport}}"
+         fstype: nfs
+         state: mounted
+       tags: nfs_client

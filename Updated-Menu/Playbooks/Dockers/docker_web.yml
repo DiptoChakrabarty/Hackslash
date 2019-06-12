@@ -1,0 +1,59 @@
+---
+- hosts: localhost
+  tasks: 
+    - name: Install Pip
+      package:
+        name: python-pip
+        state: present
+    - name: Install docker-py
+      pip:
+        name: docker-py
+    - name: Build Docker Image
+      docker_image:
+        name: answeb
+        path: "/root/Desktop/Github/Menu-Automation/Dockers" 
+        state: build
+    - name: create unique name
+      set_fact:
+        temp_container_name:  ex3_build_{{lookup('pipe', 'date "+%Y%m%d%H%M%S"')}}
+    - name: Running Container
+      docker_container:
+        name: temp_container_name
+        image: answeb
+        state: started
+        interactive: true
+        tty: true
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

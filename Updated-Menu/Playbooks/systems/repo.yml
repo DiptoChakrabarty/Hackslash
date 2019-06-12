@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    - source_iso: "/run/media/root/RHEL-7.5\ Server.x86_64/repodata"
+    - dest_iso:  "/RHEL-7.5\ Server.x86_64"
+    - repo_mount: "/mnt/dvd100"
+  tasks:
+    - name: Upload Iso File
+      copy:     
+        src: "{{source_iso}}"
+        dest: "{{dest_iso}}"
+        force: yes
+    - name: Mount Iso File
+      mount:
+        path: "{{repo_mount}}"
+        src: "{{dest_iso}}"
+        fstype: iso9660
+        opts: loop.ro
+        state: mounted
+    - name: Add Repos
+      yum_repository:
+        name: local
+        description: Local DVD repository
+        baseurl: "file:///{{repo_mount}}"
+        enabled: yes
+        gpgcheck: no

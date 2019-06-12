@@ -1,0 +1,54 @@
+---
+- hosts: localhost
+  vars_prompt:
+    - name: nm
+      private: no
+      prompt: "Enter docker name"
+  tasks: 
+    - name: Install Pip
+      package:
+        name: python-pip
+        state: present
+    - name: Install docker-py
+      pip:
+        name: docker-py
+    - name: Running Container
+      docker_container:
+        name: "{{nm}}"
+        image: website
+        state: started
+        interactive: yes
+        tty: yes
+        raw: /usr/sbin/firefox
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
