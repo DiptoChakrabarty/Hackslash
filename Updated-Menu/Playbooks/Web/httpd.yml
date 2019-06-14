@@ -1,5 +1,5 @@
 - name: Launch httpd
-  hosts: all
+  hosts: 192.168.43.63
   tasks: 
    - name: nginx uinstall
      package:
@@ -12,10 +12,10 @@
    - name: Httpd service
      service:
        name: httpd
-       state: started
+       state: started 
        enabled: yes
    - firewalld:
         port: 80/tcp
-        state: enable
+        state: enabled
         immediate: yes
         permanent: yes

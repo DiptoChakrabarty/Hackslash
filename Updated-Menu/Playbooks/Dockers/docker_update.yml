@@ -1,6 +1,43 @@
 ---
-- hosts: "{{var0}}"
+- hosts: localhost
+  tasks:
+    - name: Start httpd
+      service:
+	name: httpd
+	state: restarted
+    - name: Firewall access
+      firewalld:
+	state: enabled
+	port: 80/tcp
+	immediate: yes
+	permanent: yes
+- hosts: localhost
   tasks: 
+    - name: Mounting Files
+      mount: 
+        path: /dvd_final
+        src:  /dev/cdrom
+        fstype: iso9660
+        opts: defaults
+        state: mounted
+    - name: Yum DVD Configuration
+      yum_repository:
+	name: dvd
+        description: Local Dvd Repos
+        baseurl: "file:///run/media/root/RHEL-7.5\ Server.x86_64"
+        enabled: yes
+        gpgcheck: no
+    - name: Yum DVD Configuration
+      yum_repository:
+	name: dvd
+        description: Local Dvd Repos
+        baseurl: "http://192.168.43.254/package/"
+        enabled: yes
+        gpgcheck: no
+    - name: Dockers install
+      package:
+	name: docker-ce
+	state: present
     - name: Install Pip
       package:
         name: python-pip
@@ -8,10 +45,13 @@
     - name: Install docker-py
       pip:
         name: docker-py
+    - command: "docker pull centos"
     - name: Running Container
       docker_container:
-        name: "{{var1}}"
+        name: nameless
         image: centos
+        volumes:
+	  -  "run/media/root/RHEL-7.5\ Server.x86_64"
         state: started
         tty: yes
         interactive: yes
